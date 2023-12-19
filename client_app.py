@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 import sqlite3
+import nltk
 import matplotlib.pyplot as plt
 import seaborn as sns
 from nltk.corpus import stopwords
@@ -9,7 +10,7 @@ import string
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, PorterStemmer
 import re
-import nltk
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
 import threading  # Import the threading module
 
