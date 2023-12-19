@@ -94,7 +94,12 @@ cursor.execute('''
     )
 ''')
 conn.commit()
-
+def insert_sentiment(current_date, sentiment):
+    # Function to be run in a separate thread
+    with sqlite3.connect('sentiment_data.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO sentiment_data (date, sentiment) VALUES (?, ?)', (current_date, sentiment))
+        conn.commit()
 text = st.text_input(" ")
 
 if st.button('check the Sentiment'):
@@ -127,12 +132,7 @@ if st.button('check the Sentiment'):
 
 
 
-def insert_sentiment(current_date, sentiment):
-    # Function to be run in a separate thread
-    with sqlite3.connect('sentiment_data.db') as conn:
-        cursor = conn.cursor()
-        cursor.execute('INSERT INTO sentiment_data (date, sentiment) VALUES (?, ?)', (current_date, sentiment))
-        conn.commit()
+
 
 # ...
 
