@@ -44,10 +44,8 @@ add_bg_from_url()
 
 # Text area for input
 st.subheader("Please write your hotel review")
-text = st.text_input(" ")
 
-# Placeholder for displaying the result
-result_placeholder = st.empty()
+
 
 loaded_model=joblib.load('log.joblib')
 
@@ -97,16 +95,37 @@ cursor.execute('''
 ''')
 conn.commit()
 
-def btn_click():
-    cleaned_input_text = text_cleaning(text)   
-    X_test_vectorized = vectorizer.transform([cleaned_input_text])
-    p = loaded_model.predict(X_test_vectorized)
+text = st.text_input(" ")
+
+if st.button('check the Sentiment'):
+    # Check if the user has entered a review
+    if not text:
+        st.warning("Please enter a review before predicting the sentiment.")
+    else:
+        # Preprocess the input text
+        cleaned_input_text = text_cleaning(text)
+
+        # Vectorize the input text using the loaded TF-IDF Vectorizer
+        X_text_vectorized = vectorizer.transform([cleaned_input_text])
+
+        # Make predictions using the loaded Naive Bayes model
+        p = loaded_model.predict(X_text_vectorized)
+
+        # Display sentiment along with emoticons
+        if p[0] == 'positive':
+            st.write('<div style="font-size: 18px; color: green; font-weight: bold;">It\'s a positive sentiment!! 😃</div>', unsafe_allow_html=True)
+        elif p[0] == 'neutral':
+            st.write('<div style="font-size: 18px; color: green; font-weight: bold;">It\'s a neutral sentiment 😐</div>', unsafe_allow_html=True)
+        else:
+            st.write('<div style="font-size: 18px; color: green; font-weight: bold;">It\'s a negative sentiment 😔</div>', unsafe_allow_html=True)
+
+
     
     # Store sentiment in the database using a separate thread
     current_date = pd.Timestamp.now().strftime('%Y-%m-%d')
     threading.Thread(target=insert_sentiment, args=(current_date, p[0])).start()
 
-    st.markdown(f'<div style="font-size: 34px; color:green; font-weight: bold;">Result: {p[0]}</div>', unsafe_allow_html=True)
+
 
 def insert_sentiment(current_date, sentiment):
     # Function to be run in a separate thread
