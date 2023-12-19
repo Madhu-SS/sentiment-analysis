@@ -44,7 +44,7 @@ add_bg_from_url()
 
 # Text area for input
 st.subheader("Please write your hotel review")
-text = st.text_area("0")
+text = st.text_input(" ")
 
 # Placeholder for displaying the result
 result_placeholder = st.empty()
