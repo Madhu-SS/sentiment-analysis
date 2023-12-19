@@ -125,7 +125,7 @@ btn = st.button("Check the Sentiment", on_click=btn_click)
 # Password protection
 password = st.text_input("Enter Password:", type="password")
 
-if password == "madhu":  # Replace "your_password" with your actual password
+if password == "asdfg":  # Replace "your_password" with your actual password
     st.success("Password accepted! You can now access the histogram.")
     
     # Access to histogram page
