@@ -4,5 +4,4 @@ joblib
 scikit-learn
 nltk
 matplotlib
-sqlite3
 seaborn
