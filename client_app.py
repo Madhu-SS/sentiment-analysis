@@ -137,7 +137,6 @@ def insert_sentiment(current_date, sentiment):
 # ...
 
 
-btn = st.button("Check the Sentiment", on_click=btn_click)
 
 # ...
 
