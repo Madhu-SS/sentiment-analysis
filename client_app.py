@@ -144,10 +144,10 @@ if st.button('check the Sentiment'):
 password = st.text_input("Enter Password:", type="password")
 
 if password == "asdfg":  # Replace "your_password" with your actual password
-    st.success("Password accepted! You can now access the histogram.")
+    st.success("Password accepted! You can now access the Data.")
     
     # Access to histogram page
-    st.subheader("Histogram Page")
+    st.subheader("Client Page")
     
     # Date selection for histogram
     selected_date = st.date_input("Select a Date:")
